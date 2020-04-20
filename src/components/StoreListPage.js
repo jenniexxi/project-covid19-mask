@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import StoreList from './StoreList';
 
 function StoreListPage() {
   
@@ -57,9 +58,7 @@ function StoreListPage() {
       <div>총 카운트 : {count}</div>
       {loading ? "loaindg..." : 
         items.length > 0 ? 
-        <ul>
-          {items.map((item) => {return <li key={item.code}>{item.name}, 주소: {item.addr}, 남은 개수 : {item.remain_stat}</li>})}
-        </ul> :
+        <StoreList items={items} /> : // 이게 props로 넘겨주기
         addrValue === "" ? "" : "검색 결과가 없습니다."
       }
     </>
