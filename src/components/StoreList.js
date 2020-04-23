@@ -1,4 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StoreListUl = styled.ul`
+  list-style: none;
+  padding: 0;
+`
+const ListItem = styled.li`
+  list-style: none;
+`
 
 function StoreList({items}) {
   // items 를 props {객체}에 받아오기
@@ -7,9 +16,9 @@ function StoreList({items}) {
 
   return (
     <>
-      <ul>
-        {items.map((item) => {return <li key={item.code}>{item.name}, 주소: {item.addr}, 남은 개수 : {item.remain_stat}</li>})}
-      </ul>
+      <StoreListUl>
+        {items.map((item) => {return <ListItem key={item.code}>{item.name}, 주소: {item.addr}, 남은 개수 : {item.remain_stat}</ListItem>})}
+      </StoreListUl>
     </>
   )
 }
