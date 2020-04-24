@@ -17,7 +17,10 @@ function StoreList({items}) {
   return (
     <>
       <StoreListUl>
-        {items.map((item) => {return <ListItem key={item.code}>{item.name}, 주소: {item.addr}, 남은 개수 : {item.remain_stat}</ListItem>})}
+        {items ?
+          items.map((item) => {return <ListItem key={item.code}>{item.name}, 주소: {item.addr}, 남은 개수 : {item.remain_stat}</ListItem>})
+           : "검색 결과가 없습니다."
+        }
       </StoreListUl>
     </>
   )
