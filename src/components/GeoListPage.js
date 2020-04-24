@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import StoreList from './StoreList';
@@ -50,7 +50,7 @@ function GeoListPage() {
     } else {
       alert('gps를 지원하지 않습니다.');
     }
-  }, [search]);
+  }, [distance]);
 
   const handleChangeSearch = (e) => {
     e.preventDefault();
@@ -59,20 +59,47 @@ function GeoListPage() {
 
   const handleChangeSubmit = (e) => {
     e.preventDefault();
+    if(!search){
+      alert("변경거리를 입력해주세요.");
+      return;
+    }
     setDistance(search);
     setSearch("");
+  }
+
+  const handleChangeDistance = (e) => {
+    e.preventDefault();
+    // setSearch(e.target.value);
+    setDistance(e.target.value);
   }
 
   return (
     <>
       <div>
         <form onSubmit={handleChangeSubmit}>
+          <select
+            onChange={handleChangeDistance}
+            value={distance}
+            >
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+            <option value="1000">1000</option>
+          </select>
+          
           <DistanceInput
             type="text"
             placeholder="반경 거리(m)를 입력하세요."
             value={search}
             onChange={handleChangeSearch}
           />
+          
           <BtnSearch type="button" onClick={handleChangeSubmit}>검색</BtnSearch>
         </form>
       </div>
