@@ -6,7 +6,7 @@ const StoreListUl = styled.ul`
   padding: 0;
 `
 const ListItem = styled.li`
-  list-style: none;
+  margin-bottom: 5px
 `
 
 function StoreList({items}) {

@@ -1,6 +1,25 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import StoreList from './StoreList';
+import styled from 'styled-components';
+import 'normalize.css';
+
+const AddrInput = styled.input`
+  width: 250px;
+  height: 36px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 0;
+`
+
+const BtnSearch = styled.button`
+  width: 60px;
+  height: 36px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+`
 
 function StoreListPage() {
   
@@ -46,12 +65,13 @@ function StoreListPage() {
     <>
       <div>
         <form onSubmit={handleChangeSubmit}>
-          <input
+          <AddrInput
             type="text"
-            placeholder="Write adrress"
+            placeholder="도, 시, 구까지 적어주세요."
             value={search}
             onChange={handleChangeSearch}
           />
+          <BtnSearch type="button" onClick={handleChangeSubmit}>검색</BtnSearch>
         </form>
       </div>
       <div>검색한 주소 : {town}</div>
