@@ -2,7 +2,6 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import StoreList from './StoreList';
 import styled from 'styled-components';
-import 'normalize.css';
 
 const AddrInput = styled.input`
   width: 250px;
@@ -10,7 +9,6 @@ const AddrInput = styled.input`
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   font-size: 16px;
-  padding: 0;
 `
 
 const BtnSearch = styled.button`
