@@ -3,6 +3,22 @@ import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import StoreList from './StoreList';
 
+const DistanceInput = styled.input`
+  width: 250px;
+  height: 36px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  font-size: 16px;
+` 
+
+const BtnSearch = styled.button`
+  width: 60px;
+  height: 36px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+`
+
 function GeoListPage() {
 
   const [items, setItem] = useState([]);
@@ -51,13 +67,13 @@ function GeoListPage() {
     <>
       <div>
         <form onSubmit={handleChangeSubmit}>
-          <input
+          <DistanceInput
             type="text"
-            placeholder="반경 거리(m)를 입력하세요"
+            placeholder="반경 거리(m)를 입력하세요."
             value={search}
             onChange={handleChangeSearch}
           />
-          <button type="button" onClick={handleChangeSubmit}>검색</button>
+          <BtnSearch type="button" onClick={handleChangeSubmit}>검색</BtnSearch>
         </form>
       </div>
       <div>✓반경거리의 기본값은 200m로 설정되어 있습니다.</div>
