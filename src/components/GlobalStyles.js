@@ -9,6 +9,9 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-size:14px;
     }
+    button{
+        vertical-align: top;
+    }
 `;
 
 export default GlobalStyles;

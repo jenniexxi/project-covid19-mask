@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import StoreList from './StoreList';
+import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps';
 
 const DistanceInput = styled.input`
   width: 250px;
@@ -110,8 +111,33 @@ function GeoListPage() {
         <div>경도 : {longitude}</div>
       </div>
       <StoreList items={items} />
+
+      <RenderAfterNavermapsLoaded
+        ncpClientId={'u7417cjkyg'} // 자신의 네이버 계정에서 발급받은 Client ID
+        error={<p>Maps Load Error</p>}
+        loading={<p>Maps Loading...</p>}
+      >
+        <NaverMapAPI 
+          latitude={latitude}
+          longitude={longitude}
+        />
+      </RenderAfterNavermapsLoaded>
     </>
   )
+}
+
+const NaverMapAPI = ({latitude, longitude}) => {
+  return (
+    <NaverMap
+      mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
+      style={{
+        width: '100%', // 네이버지도 가로 길이
+        height: '100vh' // 네이버지도 세로 길이
+      }}
+      defaultCenter={{ lat: latitude, lng: longitude }} // 지도 초기 위치
+      defaultZoom={16} // 지도 초기 확대 배율
+    />
+  );
 }
 
 export default GeoListPage;

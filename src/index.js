@@ -5,10 +5,12 @@ import './index.css';
 import Router from './components/Router';
 import GlobalStyles from "./components/GlobalStyles";
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Router/>
+    <Router />
     <GlobalStyles />
   </React.StrictMode>,
   document.getElementById('root')
