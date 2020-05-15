@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import StoreList from './StoreList';
-import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps';
+import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 
 const DistanceInput = styled.input`
   width: 250px;
@@ -29,6 +29,8 @@ function GeoListPage() {
   const [search, setSearch] = useState();
   const [distance, setDistance] = useState(200);
 
+  let naverMapRef = null;
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -40,6 +42,7 @@ function GeoListPage() {
           .then(response => response.json())
           .then(data => {
             setItem(data.stores);
+            console.log(data.stores);
           })
       }, function(error) {
         console.error(error);
@@ -72,6 +75,40 @@ function GeoListPage() {
     e.preventDefault();
     // setSearch(e.target.value);
     setDistance(e.target.value);
+  }
+
+  const NaverMapAPI = ({latitude, longitude, stores}) => {
+    
+    const navermaps = window.naver.maps;
+
+    return (
+      <NaverMap
+        mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
+        style={{
+          width: '100%', // 네이버지도 가로 길이
+          height: '100vh' // 네이버지도 세로 길이
+        }}
+        defaultCenter={{ lat: latitude, lng: longitude }} // 지도 초기 위치
+        defaultZoom={16} // 지도 초기 확대 배율
+        naverRef={ref=> {naverMapRef = ref}}
+      >
+        {stores ?
+          stores.map((item) => {return <Marker
+            key={item.code}
+            position={new navermaps.LatLng(item.lat, item.lng)}
+            animation={2}
+            title={item.name}
+          />})
+           : ""
+        }
+        <Marker
+          key={1}
+          position={new navermaps.LatLng(latitude, longitude)}
+          animation={0}
+          title={"현재위치"}
+        />
+      </NaverMap>
+    );
   }
 
   return (
@@ -110,7 +147,7 @@ function GeoListPage() {
         <div>위도 : {latitude}</div>
         <div>경도 : {longitude}</div>
       </div>
-      <StoreList items={items} />
+      {/* <StoreList items={items} /> // 목록, 반경거리에 따른 목록  */}
 
       <RenderAfterNavermapsLoaded
         ncpClientId={'u7417cjkyg'} // 자신의 네이버 계정에서 발급받은 Client ID
@@ -120,24 +157,11 @@ function GeoListPage() {
         <NaverMapAPI 
           latitude={latitude}
           longitude={longitude}
+          stores={items}
         />
       </RenderAfterNavermapsLoaded>
     </>
   )
-}
-
-const NaverMapAPI = ({latitude, longitude}) => {
-  return (
-    <NaverMap
-      mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
-      style={{
-        width: '100%', // 네이버지도 가로 길이
-        height: '100vh' // 네이버지도 세로 길이
-      }}
-      defaultCenter={{ lat: latitude, lng: longitude }} // 지도 초기 위치
-      defaultZoom={16} // 지도 초기 확대 배율
-    />
-  );
 }
 
 export default GeoListPage;
