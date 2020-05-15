@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+.plenty{color: green}
+.some{color: yellow}
+.few{color: red}
+.empty{color: black}
+.break{color: black}
+.iconSize{width: 12px;height: 12px;}
