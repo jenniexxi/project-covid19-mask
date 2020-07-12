@@ -38,9 +38,9 @@
 }
 
 
-.plenty{color: green}
-.some{color: yellow}
-.few{color: red}
+.plenty{color: #1abc9c}
+.some{color: #f1c40f}
+.few{color: #e74c3c}
 .empty{color: black}
 .break{color: black}
 .iconSize{width: 12px;height: 12px;}

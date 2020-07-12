@@ -9,6 +9,8 @@ const AddrInput = styled.input`
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   font-size: 16px;
+  margin-right: 8px;
+  padding-left: 10px;
 `
 
 const BtnSearch = styled.button`
@@ -17,6 +19,17 @@ const BtnSearch = styled.button`
   background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
+`
+
+const SearchBox = styled.div`
+  text-align: center;
+  margin: 10px auto;
+`
+
+const AddrBox = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 0 0 30px;
 `
 
 function StoreListPage() {
@@ -61,7 +74,7 @@ function StoreListPage() {
 
   return (
     <>
-      <div>
+      <SearchBox>
         <form onSubmit={handleChangeSubmit}>
           <AddrInput
             type="text"
@@ -71,9 +84,11 @@ function StoreListPage() {
           />
           <BtnSearch type="button" onClick={handleChangeSubmit}>검색</BtnSearch>
         </form>
-      </div>
-      <div>검색한 주소 : {town}</div>
-      <div>총 카운트 : {count}</div>
+      </SearchBox>
+      <AddrBox>
+        <div>검색한 주소 : {town}</div>
+        <div>총 카운트 : {count}</div>
+      </AddrBox>
       {loading ? "loaindg..." : 
         items.length > 0 ? 
         <StoreList items={items} /> : // 이게 props로 넘겨주기
